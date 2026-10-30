@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Buddy Chat — Multimodal AI Assistant</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="chat-container">
+    <!-- Header -->
+    <header class="chat-header">
+      <div class="header-brand">
+        <div class="logo-icon">🎓</div>
+        <div>
+          <h1>Study Buddy Chat</h1>
+          <p class="subtitle">AI Multimodal Lab Assistant • Text, Images, PDFs & Voice</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="voice-toggle-btn" class="icon-toggle-btn active" title="Toggle AI Voice Reading">
+          <span class="icon">🔊</span>
+          <span class="label">Voice: ON</span>
+        </button>
+        <span class="mode-badge" id="mode-badge">Checking connection...</span>
+      </div>
+    </header>
+
+    <!-- Error / Alert Banner -->
+    <div id="error-banner" class="error-banner hidden" role="alert">
+      <div class="error-content">
+        <span class="error-icon">⚠️</span>
+        <span id="error-text"></span>
+      </div>
+      <button id="dismiss-error" aria-label="Dismiss error">&times;</button>
+    </div>
+
+    <!-- Chat Messages Window -->
+    <main class="chat-messages" id="chat-messages">
+      <div class="message assistant">
+        <div class="bubble">
+          <p><strong>👋 Welcome to Study Buddy!</strong></p>
+          <p>I am your multimodal college lab assistant powered by Google Gemini. Here's what you can do:</p>
+          <ul>
+            <li>💬 <strong>Ask Questions:</strong> Type any topic or problem.</li>
+            <li>🖼️ <strong>Analyze Images:</strong> Attach diagrams, formulas, or notes.</li>
+            <li>📄 <strong>Read Documents:</strong> Upload PDFs or lecture notes to summarize.</li>
+            <li>🎙️ <strong>Transcribe Audio:</strong> Attach voice recordings or lecture clips.</li>
+            <li>🔊 <strong>Listen:</strong> Responses can be read aloud using the voice toggle above.</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <!-- Loading Indicator -->
+    <div id="loading-indicator" class="loading-indicator hidden">
+      <div class="spinner"></div>
+      <span class="loading-label" id="loading-label">Study Buddy is analyzing...</span>
+    </div>
+
+    <!-- Attachment Preview Area -->
+    <div id="attachment-preview-bar" class="attachment-preview-bar hidden">
+      <div class="preview-item">
+        <span class="preview-icon" id="preview-icon">📎</span>
+        <img id="preview-img" class="preview-thumbnail hidden" alt="Thumbnail" />
+        <div class="preview-meta">
+          <span id="preview-filename" class="preview-name">file.png</span>
+          <span id="preview-filesize" class="preview-size">0 KB</span>
+        </div>
+        <button type="button" id="remove-file-btn" class="remove-file-btn" title="Remove attachment">&times;</button>
+      </div>
+    </div>
+
+    <!-- Input Footer -->
+    <footer class="chat-footer">
+      <form id="chat-form" class="chat-form">
+        <!-- Hidden file input for images, pdfs, audio -->
+        <input 
+          type="file" 
+          id="file-input" 
+          accept="image/*,application/pdf,.txt,.py,.md,.mp3,.wav,.m4a,.ogg" 
+          style="display: none;" 
+        />
+
+        <div class="input-controls">
+          <!-- Attachment Button -->
+          <button 
+            type="button" 
+            id="attach-btn" 
+            class="action-btn" 
+            title="Attach Image, PDF, or Audio file"
+          >
+            📎
+          </button>
+
+          <!-- Voice Mic Input (Speech-to-Text) Button -->
+          <button 
+            type="button" 
+            id="mic-btn" 
+            class="action-btn" 
+            title="Speak into microphone"
+          >
+            🎙️
+          </button>
+
+          <!-- Textarea / Input -->
+          <textarea 
+            id="user-input" 
+            name="message" 
+            placeholder="Ask a question or describe your attached file... (Shift+Enter for newline)" 
+            rows="1"
+            autocomplete="off"
+          ></textarea>
+
+          <!-- Send Button -->
+          <button type="submit" id="send-btn" class="send-btn" title="Send message">
+            <span>Send</span>
+            <span class="send-icon">➤</span>
+          </button>
+        </div>
+      </form>
+    </footer>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
